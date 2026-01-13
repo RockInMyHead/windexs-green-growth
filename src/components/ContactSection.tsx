@@ -15,22 +15,65 @@ export const ContactSection = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    console.log('Form submit triggered');
+
     if (!formData.name || !formData.email || !formData.message) {
+      console.log('Validation failed');
       toast.error("Пожалуйста, заполните все обязательные поля");
       return;
     }
 
-    setIsSubmitted(true);
-    toast.success("Спасибо! Мы свяжемся с вами в ближайшее время.");
-    
-    // Reset form after animation
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: "", email: "", phone: "", message: "" });
-    }, 3000);
+    console.log('Sending form data:', formData);
+
+    try {
+      console.log('Making fetch request...');
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+      const response = await fetch('http://127.0.0.1:3001/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
+      const data = await response.json();
+      console.log('Response data:', data);
+
+      if (data.success) {
+        setIsSubmitted(true);
+        toast.success(data.message);
+
+        // Reset form after animation
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormData({ name: "", email: "", phone: "", message: "" });
+        }, 3000);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error('Error sending form:', error);
+
+      if (error.name === 'AbortError') {
+        console.error('Request timed out');
+        toast.error("Превышено время ожидания ответа сервера. Попробуйте позже.");
+      } else if (error.message.includes('fetch')) {
+        console.error('Network error');
+        toast.error("Проблема с подключением к серверу. Проверьте интернет-соединение.");
+      } else {
+        console.error('Unknown error:', error.message);
+        toast.error("Произошла ошибка при отправке заявки. Попробуйте позже.");
+      }
+    }
   };
 
   return (

@@ -2,6 +2,16 @@ import { motion } from "framer-motion";
 import { Check, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const scrollToContact = () => {
+  const contactSection = document.getElementById('contact');
+  if (contactSection) {
+    contactSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+};
+
 const plans = [
   {
     name: "Стартовый",
@@ -137,6 +147,7 @@ export const PricingSection = () => {
               </ul>
 
               <Button
+                onClick={scrollToContact}
                 className={`w-full py-6 text-lg ${
                   plan.popular ? "glow-effect" : ""
                 }`}

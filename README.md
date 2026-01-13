@@ -1,73 +1,80 @@
-# Welcome to your Lovable project
+# Windexs Реклама - Сайт рекламного агентства
 
-## Project info
+## О проекте
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Этот проект представляет собой одностраничный сайт (SPA) для рекламного агентства Windexs, разработанный с использованием современных веб-технологий.
 
-## How can I edit this code?
+## Технологии
 
-There are several ways of editing your application.
+Проект построен с использованием следующих технологий:
 
-**Use Lovable**
+- **Vite** - быстрый сборщик для разработки
+- **TypeScript** - типизированный JavaScript
+- **React** - библиотека для создания пользовательских интерфейсов
+- **shadcn/ui** - компоненты пользовательского интерфейса
+- **Tailwind CSS** - утилитарный CSS-фреймворк
+- **Framer Motion** - анимации
+- **React Router** - маршрутизация
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Локальный запуск
 
-Changes made via Lovable will be committed automatically to this repo.
+Для запуска проекта локально необходимо:
 
-**Use your preferred IDE**
+### Frontend
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. Установить зависимости:
+```bash
+npm install
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+2. Запустить development сервер:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Frontend будет доступен по адресу `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Backend (для отправки email)
 
-**Use GitHub Codespaces**
+1. Перейти в папку сервера:
+```bash
+cd server
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+2. Установить зависимости:
+```bash
+npm install
+```
 
-## What technologies are used for this project?
+3. Настроить `.env` файл с API ключом от smtp.bz (смотрите server/README.md)
 
-This project is built with:
+4. Запустить сервер:
+```bash
+npm start
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Backend будет доступен по адресу `http://localhost:3001`
 
-## How can I deploy this project?
+## Сборка проекта
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Для сборки проекта в production:
+```bash
+npm run build
+```
 
-## Can I connect a custom domain to my Lovable project?
+## Структура проекта
 
-Yes, you can!
+```
+src/
+├── components/          # Переиспользуемые компоненты
+│   ├── ui/             # Компоненты интерфейса (shadcn/ui)
+│   └── ...             # Другие компоненты
+├── pages/              # Страницы приложения
+├── hooks/              # Пользовательские хуки
+├── lib/                # Утилиты и конфигурации
+└── ...
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Разработка
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Проект использует современный стек технологий для быстрой и эффективной разработки. Все компоненты типизированы с помощью TypeScript, что обеспечивает высокую надежность кода.
