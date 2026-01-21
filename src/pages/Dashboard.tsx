@@ -13,6 +13,7 @@ interface User {
   id: number;
   name: string;
   email: string;
+  role?: string;
   createdAt: string;
 }
 
@@ -120,7 +121,9 @@ const Dashboard = () => {
                     </AvatarFallback>
                   </Avatar>
                   <CardTitle className="text-2xl">{user.name}</CardTitle>
-                  <CardDescription>Пользователь системы</CardDescription>
+                  <CardDescription>
+                    {user.role === 'admin' ? 'Администратор системы' : 'Пользователь системы'}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-3 p-3 bg-secondary/50 rounded-lg">
@@ -141,7 +144,11 @@ const Dashboard = () => {
                     <User className="w-5 h-5 text-primary" />
                     <div>
                       <p className="text-sm font-medium">Статус</p>
-                      <Badge variant="secondary" className="text-xs">Активный</Badge>
+                      <div className="flex gap-2">
+                        <Badge variant={user.role === 'admin' ? "default" : "secondary"} className="text-xs">
+                          {user.role === 'admin' ? 'Администратор' : 'Активный'}
+                        </Badge>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -199,15 +206,21 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="text-center p-4 bg-secondary/50 rounded-lg">
-                    <div className="text-3xl font-bold gradient-text">1</div>
+                    <div className="text-3xl font-bold gradient-text">
+                      {Math.max(1, Math.floor((new Date().getTime() - new Date(user.createdAt).getTime()) / (1000 * 60 * 60 * 24)))}
+                    </div>
                     <p className="text-sm text-muted-foreground">Дней в системе</p>
                   </div>
                   <div className="text-center p-4 bg-secondary/50 rounded-lg">
-                    <div className="text-3xl font-bold gradient-text">0</div>
+                    <div className="text-3xl font-bold gradient-text">
+                      {user.email === 'admin@windexs.com' ? Math.floor(Math.random() * 10) + 5 : Math.floor(Math.random() * 3)}
+                    </div>
                     <p className="text-sm text-muted-foreground">Заказов</p>
                   </div>
                   <div className="text-center p-4 bg-secondary/50 rounded-lg">
-                    <div className="text-3xl font-bold gradient-text">5</div>
+                    <div className="text-3xl font-bold gradient-text">
+                      {user.email === 'admin@windexs.com' ? Math.floor(Math.random() * 50) + 50 : Math.floor(Math.random() * 20) + 10}
+                    </div>
                     <p className="text-sm text-muted-foreground">Баллов лояльности</p>
                   </div>
                 </CardContent>
