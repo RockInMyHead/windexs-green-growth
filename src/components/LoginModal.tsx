@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Eye, EyeOff, Mail, Lock, X } from "lucide-react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -130,12 +130,12 @@ export const LoginModal = ({ isOpen, onClose, onAuthSuccess }: LoginModalProps) 
                 <DialogTitle className="text-2xl font-display font-bold">
                   {isLogin ? "Вход в аккаунт" : "Регистрация"}
                 </DialogTitle>
-                <p id="login-modal-description" className="text-muted-foreground">
+                <DialogDescription id="login-modal-description" className="text-muted-foreground">
                   {isLogin
                     ? "Введите свои учетные данные для входа в систему"
                     : "Создайте новый аккаунт для доступа к личному кабинету"
                   }
-                </p>
+                </DialogDescription>
               </DialogHeader>
             </div>
 
