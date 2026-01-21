@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { LogIn, UserPlus, User, BarChart3 } from "lucide-react";
+import { LogIn, UserPlus, User, BarChart3, FileText } from "lucide-react";
 import { useState, useEffect } from "react";
 import { LoginModal } from "./LoginModal";
 import { useNavigate } from "react-router-dom";
@@ -61,6 +61,14 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <FileText className="w-4 h-4 mr-2" />
+                Сценарии
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={handleLogout}
                 className="text-muted-foreground hover:text-foreground"
               >
@@ -95,6 +103,13 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <FileText className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={handleLogout}
                 className="text-muted-foreground hover:text-foreground"
               >
@@ -118,6 +133,14 @@ export const Header = () => {
               >
                 <BarChart3 className="w-4 h-4 mr-2" />
                 Метрика
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <FileText className="w-4 h-4 mr-2" />
+                Сценарии
               </Button>
               <Button
                 variant="ghost"
@@ -156,6 +179,13 @@ export const Header = () => {
                 className="text-muted-foreground hover:text-foreground"
               >
                 <BarChart3 className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <FileText className="w-4 h-4" />
               </Button>
               <Button
                 variant="ghost"
