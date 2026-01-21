@@ -112,6 +112,7 @@ export const LoginModal = ({ isOpen, onClose, onAuthSuccess }: LoginModalProps) 
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
         className="sm:max-w-[425px] p-0 overflow-hidden"
+        aria-describedby="login-modal-description"
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
