@@ -77,7 +77,7 @@ const Admin = () => {
       // Check if user is admin
       const profileResponse = await fetch('http://localhost:3001/api/auth/profile', {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': token
         }
       });
 
@@ -125,7 +125,7 @@ const Admin = () => {
       const token = localStorage.getItem('authToken');
       const response = await fetch('http://localhost:3001/api/admin/users', {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': token
         }
       });
 
@@ -143,7 +143,7 @@ const Admin = () => {
       const token = localStorage.getItem('authToken');
       const response = await fetch('http://localhost:3001/api/admin/applications', {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': token
         }
       });
 
@@ -161,7 +161,7 @@ const Admin = () => {
       const token = localStorage.getItem('authToken');
       const response = await fetch('http://localhost:3001/api/admin/logs', {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': token
         }
       });
 
@@ -184,7 +184,7 @@ const Admin = () => {
       const token = localStorage.getItem('authToken');
       const response = await fetch(`http://localhost:3001/api/admin/users?search=${encodeURIComponent(searchQuery)}`, {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': token
         }
       });
 
