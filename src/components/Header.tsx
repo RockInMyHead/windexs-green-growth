@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { LogIn, UserPlus, User } from "lucide-react";
+import { LogIn, UserPlus, User, BarChart3 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { LoginModal } from "./LoginModal";
 import { useNavigate } from "react-router-dom";
@@ -53,6 +53,14 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <BarChart3 className="w-4 h-4 mr-2" />
+                Метрика
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={handleLogout}
                 className="text-muted-foreground hover:text-foreground"
               >
@@ -80,6 +88,13 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <BarChart3 className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={handleLogout}
                 className="text-muted-foreground hover:text-foreground"
               >
@@ -96,6 +111,14 @@ export const Header = () => {
         ) : (
           <>
             <div className="hidden md:flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <BarChart3 className="w-4 h-4 mr-2" />
+                Метрика
+              </Button>
               <Button
                 variant="ghost"
                 size="sm"
@@ -130,6 +153,13 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <BarChart3 className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => setIsLoginModalOpen(true)}
                 className="text-muted-foreground hover:text-foreground"
               >
@@ -143,10 +173,10 @@ export const Header = () => {
                 <UserPlus className="w-4 h-4" />
               </Button>
               <Button
-          onClick={() => scrollToSection("contact")}
+                onClick={() => scrollToSection("contact")}
                 size="sm"
-        >
-          Заказать
+              >
+                Заказать
               </Button>
             </div>
           </>
