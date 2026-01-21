@@ -18,7 +18,7 @@ export const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submit triggered');
-
+    
     if (!formData.name || !formData.email || !formData.message) {
       console.log('Validation failed');
       toast.error("Пожалуйста, заполните все обязательные поля");
@@ -49,14 +49,14 @@ export const ContactSection = () => {
       console.log('Response data:', data);
 
       if (data.success) {
-        setIsSubmitted(true);
+    setIsSubmitted(true);
         toast.success(data.message);
-
-        // Reset form after animation
-        setTimeout(() => {
-          setIsSubmitted(false);
-          setFormData({ name: "", email: "", phone: "", message: "" });
-        }, 3000);
+    
+    // Reset form after animation
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    }, 3000);
       } else {
         toast.error(data.message);
       }

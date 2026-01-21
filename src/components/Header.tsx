@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { LogIn, UserPlus } from "lucide-react";
+import { useState } from "react";
+import { LoginModal } from "./LoginModal";
 
 export const Header = () => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -38,12 +44,61 @@ export const Header = () => {
           </button>
         </div>
 
-        <button
-          onClick={() => scrollToSection("contact")}
-          className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
-        >
-          Заказать
-        </button>
+        <div className="hidden md:flex items-center gap-3">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsLoginModalOpen(true)}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <LogIn className="w-4 h-4 mr-2" />
+            Вход
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <UserPlus className="w-4 h-4 mr-2" />
+            Регистрация
+          </Button>
+          <Button
+            onClick={() => scrollToSection("contact")}
+            size="sm"
+          >
+            Заказать
+          </Button>
+        </div>
+
+        {/* Mobile menu */}
+        <div className="md:hidden flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsLoginModalOpen(true)}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <LogIn className="w-4 h-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <UserPlus className="w-4 h-4" />
+          </Button>
+          <Button
+            onClick={() => scrollToSection("contact")}
+            size="sm"
+          >
+            Заказать
+          </Button>
+        </div>
+
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        />
       </nav>
     </motion.header>
   );
