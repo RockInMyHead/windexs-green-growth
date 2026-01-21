@@ -130,13 +130,13 @@ export const LoginModal = ({ isOpen, onClose, onAuthSuccess }: LoginModalProps) 
                 <DialogTitle className="text-2xl font-display font-bold">
                   {isLogin ? "Вход в аккаунт" : "Регистрация"}
                 </DialogTitle>
-                <DialogDescription id="login-modal-description" className="text-muted-foreground">
-                  {isLogin
-                    ? "Введите свои учетные данные для входа в систему"
-                    : "Создайте новый аккаунт для доступа к личному кабинету"
-                  }
-                </DialogDescription>
               </DialogHeader>
+              <DialogDescription id="login-modal-description" className="text-muted-foreground px-6 text-center">
+                {isLogin
+                  ? "Введите свои учетные данные для входа в систему"
+                  : "Создайте новый аккаунт для доступа к личному кабинету"
+                }
+              </DialogDescription>
             </div>
 
             {/* Form */}
