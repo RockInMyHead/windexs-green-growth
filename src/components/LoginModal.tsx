@@ -67,8 +67,9 @@ export const LoginModal = ({ isOpen, onClose, onAuthSuccess }: LoginModalProps) 
       const data = await response.json();
 
       if (data.success) {
-        // Сохраняем токен в localStorage
+        // Сохраняем токен и email в localStorage
         localStorage.setItem('authToken', data.token);
+        localStorage.setItem('userEmail', data.user.email);
 
         toast.success(data.message);
         setIsLoading(false);

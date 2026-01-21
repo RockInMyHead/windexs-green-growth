@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { LogIn, UserPlus, User, BarChart3, FileText } from "lucide-react";
+import { LogIn, UserPlus, User, BarChart3, FileText, Shield } from "lucide-react";
 import { useState, useEffect } from "react";
 import { LoginModal } from "./LoginModal";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +8,22 @@ import { useNavigate } from "react-router-dom";
 export const Header = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Проверяем наличие токена при загрузке
+    // Проверяем наличие токена и получаем роль пользователя при загрузке
     const token = localStorage.getItem('authToken');
-    setIsAuthenticated(!!token);
+    if (token) {
+      setIsAuthenticated(true);
+      // Mock role check - in real app would decode JWT or call API
+      // For demo, admin@windexs.com is admin
+      const userEmail = localStorage.getItem('userEmail');
+      setUserRole(userEmail === 'admin@windexs.com' ? 'admin' : 'user');
+    } else {
+      setIsAuthenticated(false);
+      setUserRole(null);
+    }
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -22,7 +32,9 @@ export const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('userEmail');
     setIsAuthenticated(false);
+    setUserRole(null);
     navigate('/');
   };
 
@@ -50,6 +62,17 @@ export const Header = () => {
                 <User className="w-4 h-4 mr-2" />
                 Личный кабинет
               </Button>
+              {userRole === 'admin' && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => navigate('/admin')}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <Shield className="w-4 h-4 mr-2" />
+                  Админ
+                </Button>
+              )}
               <Button
                 variant="ghost"
                 size="sm"
@@ -95,6 +118,16 @@ export const Header = () => {
               >
                 <User className="w-4 h-4" />
               </Button>
+              {userRole === 'admin' && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => navigate('/admin')}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <Shield className="w-4 h-4" />
+                </Button>
+              )}
               <Button
                 variant="ghost"
                 size="sm"
