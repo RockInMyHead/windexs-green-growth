@@ -109,7 +109,10 @@ export const LoginModal = ({ isOpen, onClose, onAuthSuccess }: LoginModalProps) 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px] p-0 overflow-hidden">
+      <DialogContent
+        className="sm:max-w-[425px] p-0 overflow-hidden"
+        aria-describedby="login-modal-description"
+      >
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -126,6 +129,12 @@ export const LoginModal = ({ isOpen, onClose, onAuthSuccess }: LoginModalProps) 
                 <DialogTitle className="text-2xl font-display font-bold">
                   {isLogin ? "Вход в аккаунт" : "Регистрация"}
                 </DialogTitle>
+                <p id="login-modal-description" className="text-muted-foreground">
+                  {isLogin
+                    ? "Введите свои учетные данные для входа в систему"
+                    : "Создайте новый аккаунт для доступа к личному кабинету"
+                  }
+                </p>
               </DialogHeader>
             </div>
 
