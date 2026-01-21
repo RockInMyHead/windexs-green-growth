@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { LogIn, UserPlus, User, BarChart3, FileText, Shield } from "lucide-react";
+import { LogIn, User, BarChart3, FileText, Shield } from "lucide-react";
 import { useState, useEffect } from "react";
 import { LoginModal } from "./LoginModal";
 import { useNavigate } from "react-router-dom";
@@ -191,18 +191,6 @@ export const Header = () => {
                 Вход
               </Button>
               <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  setIsLoginModalOpen(true);
-                  // Здесь можно добавить логику для переключения на режим регистрации
-                }}
-                className="text-muted-foreground hover:text-foreground"
-              >
-                <UserPlus className="w-4 h-4 mr-2" />
-                Регистрация
-              </Button>
-              <Button
                 onClick={() => scrollToSection("contact")}
                 size="sm"
               >
@@ -235,13 +223,6 @@ export const Header = () => {
                 className="text-muted-foreground hover:text-foreground"
               >
                 <LogIn className="w-4 h-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                <UserPlus className="w-4 h-4" />
               </Button>
               <Button
                 onClick={() => scrollToSection("contact")}
