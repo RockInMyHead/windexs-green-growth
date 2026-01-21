@@ -61,6 +61,7 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                onClick={() => navigate('/scenarios')}
                 className="text-muted-foreground hover:text-foreground"
               >
                 <FileText className="w-4 h-4 mr-2" />
@@ -103,6 +104,7 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                onClick={() => navigate('/scenarios')}
                 className="text-muted-foreground hover:text-foreground"
               >
                 <FileText className="w-4 h-4" />
@@ -137,6 +139,7 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                onClick={() => navigate('/scenarios')}
                 className="text-muted-foreground hover:text-foreground"
               >
                 <FileText className="w-4 h-4 mr-2" />
@@ -183,6 +186,7 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                onClick={() => navigate('/scenarios')}
                 className="text-muted-foreground hover:text-foreground"
               >
                 <FileText className="w-4 h-4" />
