@@ -62,50 +62,41 @@ const Admin = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    checkAdminAccess();
-  }, []);
+    const fetchUserProfile = async () => {
+      const token = localStorage.getItem('authToken');
 
-  const checkAdminAccess = async () => {
-    const token = localStorage.getItem('authToken');
+      if (!token) {
+        setLoading(false);
+        return;
+      }
 
-    if (!token) {
-      navigate('/');
-      return;
-    }
+      try {
+        const response = await fetch('http://localhost:3001/api/auth/profile', {
+          headers: {
+            'Authorization': token
+          }
+        });
 
-    try {
-      // Check if user is admin
-      const profileResponse = await fetch('http://localhost:3001/api/auth/profile', {
-        headers: {
-          'Authorization': token
+        const data = await response.json();
+
+        if (data.success) {
+          setCurrentUser(data.user);
+          await loadInitialData();
+        } else {
+          localStorage.removeItem('authToken');
+          toast.error('Сессия истекла. Пожалуйста, войдите снова.');
         }
-      });
-
-      const profileData = await profileResponse.json();
-
-      if (!profileData.success) {
+      } catch (error) {
+        console.error('Error fetching profile:', error);
         localStorage.removeItem('authToken');
-        navigate('/');
-        return;
+        toast.error('Произошла ошибка при загрузке профиля');
+      } finally {
+        setLoading(false);
       }
+    };
 
-      // Admin check would verify user role from database
-      if (profileData.user.email !== 'admin@windexs.com') {
-        toast.error('У вас нет прав доступа к админ-панели');
-        navigate('/');
-        return;
-      }
-
-      setCurrentUser(profileData.user);
-      await loadInitialData();
-    } catch (error) {
-      console.error('Admin access check error:', error);
-      localStorage.removeItem('authToken');
-      navigate('/');
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchUserProfile();
+  }, []);
 
   const loadInitialData = async () => {
     try {

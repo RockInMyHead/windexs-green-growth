@@ -27,7 +27,7 @@ const Dashboard = () => {
       const token = localStorage.getItem('authToken');
 
       if (!token) {
-        navigate('/');
+        setLoading(false);
         return;
       }
 
@@ -44,13 +44,11 @@ const Dashboard = () => {
           setUser(data.user);
         } else {
           localStorage.removeItem('authToken');
-          navigate('/');
           toast.error('Сессия истекла. Пожалуйста, войдите снова.');
         }
       } catch (error) {
         console.error('Error fetching profile:', error);
         localStorage.removeItem('authToken');
-        navigate('/');
         toast.error('Произошла ошибка при загрузке профиля');
       } finally {
         setLoading(false);
@@ -58,7 +56,7 @@ const Dashboard = () => {
     };
 
     fetchUserProfile();
-  }, [navigate]);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
