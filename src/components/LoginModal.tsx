@@ -6,13 +6,15 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Eye, EyeOff, Mail, Lock, X } from "lucide-react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onAuthSuccess?: () => void;
 }
 
-export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
+export const LoginModal = ({ isOpen, onClose, onAuthSuccess }: LoginModalProps) => {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -22,41 +24,80 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
     name: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     // Валидация
-    if (!formData.email || !formData.password) {
-      toast.error("Пожалуйста, заполните все обязательные поля");
-      setIsLoading(false);
-      return;
-    }
-
-    if (!isLogin && formData.password !== formData.confirmPassword) {
-      toast.error("Пароли не совпадают");
-      setIsLoading(false);
-      return;
-    }
-
-    // Имитация API запроса
-    setTimeout(() => {
-      if (isLogin) {
-        toast.success("Вход выполнен успешно!");
-      } else {
-        toast.success("Регистрация прошла успешно!");
+    if (isLogin) {
+      if (!formData.email || !formData.password) {
+        toast.error("Пожалуйста, заполните email и пароль");
+        setIsLoading(false);
+        return;
       }
-      setIsLoading(false);
-      onClose();
-      // Reset form
-      setFormData({
-        email: "",
-        password: "",
-        confirmPassword: "",
-        name: "",
+    } else {
+      if (!formData.name || !formData.email || !formData.password) {
+        toast.error("Пожалуйста, заполните все обязательные поля");
+        setIsLoading(false);
+        return;
+      }
+      if (formData.password !== formData.confirmPassword) {
+        toast.error("Пароли не совпадают");
+        setIsLoading(false);
+        return;
+      }
+    }
+
+    try {
+      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
+      const payload = isLogin
+        ? { email: formData.email, password: formData.password }
+        : { name: formData.name, email: formData.email, password: formData.password };
+
+      const response = await fetch(`http://localhost:3001${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
-    }, 1500);
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Сохраняем токен в localStorage
+        localStorage.setItem('authToken', data.token);
+
+        toast.success(data.message);
+        setIsLoading(false);
+        onClose();
+
+        // Reset form
+        setFormData({
+          email: "",
+          password: "",
+          confirmPassword: "",
+          name: "",
+        });
+
+        // Обновляем состояние аутентификации
+        if (onAuthSuccess) {
+          onAuthSuccess();
+        }
+
+        // Перенаправляем на Dashboard
+        navigate('/dashboard');
+      } else {
+        toast.error(data.message);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error('Auth error:', error);
+      toast.error("Произошла ошибка. Попробуйте позже.");
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
