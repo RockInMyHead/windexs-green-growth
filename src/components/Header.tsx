@@ -16,7 +16,7 @@ export const Header = () => {
     const token = localStorage.getItem('authToken');
     if (token) {
       setIsAuthenticated(true);
-      // Mock role check - in real app would decode JWT or call API
+      // Role check would decode JWT or call API
       // For demo, admin@windexs.com is admin
       const userEmail = localStorage.getItem('userEmail');
       setUserRole(userEmail === 'admin@windexs.com' ? 'admin' : 'user');

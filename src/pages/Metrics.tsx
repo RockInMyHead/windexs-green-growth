@@ -34,49 +34,19 @@ import {
   Area
 } from 'recharts';
 
-// Mock data for charts
-const trafficData = [
-  { name: 'Янв', visitors: 4000, pageviews: 2400, bounceRate: 35 },
-  { name: 'Фев', visitors: 3000, pageviews: 1398, bounceRate: 42 },
-  { name: 'Мар', visitors: 2000, pageviews: 9800, bounceRate: 28 },
-  { name: 'Апр', visitors: 2780, pageviews: 3908, bounceRate: 31 },
-  { name: 'Май', visitors: 1890, pageviews: 4800, bounceRate: 25 },
-  { name: 'Июн', visitors: 2390, pageviews: 3800, bounceRate: 22 },
-  { name: 'Июл', visitors: 3490, pageviews: 4300, bounceRate: 18 },
-];
-
-const conversionData = [
-  { name: 'Посетители', value: 10000, color: '#8884d8' },
-  { name: 'Лиды', value: 2500, color: '#82ca9d' },
-  { name: 'Продажи', value: 500, color: '#ffc658' },
-  { name: 'Повторные покупки', value: 150, color: '#ff7c7c' },
-];
-
-const campaignData = [
-  { name: 'VK Ads', budget: 15000, reach: 50000, conversions: 125 },
-  { name: 'Google Ads', budget: 25000, reach: 75000, conversions: 200 },
-  { name: 'Yandex Direct', budget: 20000, reach: 60000, conversions: 180 },
-  { name: 'Facebook', budget: 18000, reach: 45000, conversions: 95 },
-  { name: 'TikTok', budget: 12000, reach: 80000, conversions: 160 },
-];
-
-const performanceData = [
-  { date: '2024-01-01', ctr: 2.4, cpc: 15.50, roas: 3.2 },
-  { date: '2024-01-02', ctr: 2.8, cpc: 14.20, roas: 3.8 },
-  { date: '2024-01-03', ctr: 3.1, cpc: 16.80, roas: 2.9 },
-  { date: '2024-01-04', ctr: 2.6, cpc: 13.90, roas: 4.1 },
-  { date: '2024-01-05', ctr: 3.3, cpc: 17.20, roas: 3.5 },
-  { date: '2024-01-06', ctr: 2.9, cpc: 15.80, roas: 3.7 },
-  { date: '2024-01-07', ctr: 3.0, cpc: 16.50, roas: 3.3 },
-];
+// No mock data available - metrics would come from analytics services
+const trafficData = [];
+const conversionData = [];
+const campaignData = [];
+const performanceData = [];
 
 const Metrics = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('month');
   const [selectedMetric, setSelectedMetric] = useState('traffic');
 
   const refreshData = () => {
-    // Mock refresh - in real app would fetch new data
-    console.log('Refreshing metrics data...');
+    // Would fetch new data from analytics services
+    console.log('Metrics data refresh not available - connect analytics services');
   };
 
   return (

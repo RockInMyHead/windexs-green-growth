@@ -121,7 +121,7 @@ const Scenarios = () => {
       return;
     }
 
-    // Mock save scenario
+    // Would save scenario to database
     const newScenario: Scenario = {
       id: Date.now(),
       ...formData,

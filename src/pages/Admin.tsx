@@ -89,7 +89,7 @@ const Admin = () => {
         return;
       }
 
-      // Mock admin check - in real app would check user role
+      // Admin check would verify user role from database
       if (profileData.user.email !== 'admin@windexs.com') {
         toast.error('У вас нет прав доступа к админ-панели');
         navigate('/');

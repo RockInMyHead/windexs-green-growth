@@ -206,22 +206,16 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="text-center p-4 bg-secondary/50 rounded-lg">
-                    <div className="text-3xl font-bold gradient-text">
-                      {Math.max(1, Math.floor((new Date().getTime() - new Date(user.createdAt).getTime()) / (1000 * 60 * 60 * 24)))}
-                    </div>
-                    <p className="text-sm text-muted-foreground">Дней в системе</p>
+                    <div className="text-3xl font-bold text-muted-foreground">-</div>
+                    <p className="text-sm text-muted-foreground">Статистика недоступна</p>
                   </div>
                   <div className="text-center p-4 bg-secondary/50 rounded-lg">
-                    <div className="text-3xl font-bold gradient-text">
-                      {user.email === 'admin@windexs.com' ? Math.floor(Math.random() * 10) + 5 : Math.floor(Math.random() * 3)}
-                    </div>
-                    <p className="text-sm text-muted-foreground">Заказов</p>
+                    <div className="text-3xl font-bold text-muted-foreground">-</div>
+                    <p className="text-sm text-muted-foreground">Подключите базу данных</p>
                   </div>
                   <div className="text-center p-4 bg-secondary/50 rounded-lg">
-                    <div className="text-3xl font-bold gradient-text">
-                      {user.email === 'admin@windexs.com' ? Math.floor(Math.random() * 50) + 50 : Math.floor(Math.random() * 20) + 10}
-                    </div>
-                    <p className="text-sm text-muted-foreground">Баллов лояльности</p>
+                    <div className="text-3xl font-bold text-muted-foreground">-</div>
+                    <p className="text-sm text-muted-foreground">для просмотра метрик</p>
                   </div>
                 </CardContent>
               </Card>
