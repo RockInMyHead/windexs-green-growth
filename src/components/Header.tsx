@@ -37,27 +37,6 @@ export const Header = () => {
         <div className="font-display font-bold text-xl">
           <span className="gradient-text">Windexs</span>
         </div>
-        
-        <div className="hidden md:flex items-center gap-8">
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Главная
-          </button>
-          <button
-            onClick={() => scrollToSection("pricing")}
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Тарифы
-          </button>
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Контакты
-          </button>
-        </div>
 
         {isAuthenticated ? (
           <>
