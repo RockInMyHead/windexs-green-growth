@@ -32,7 +32,7 @@ npm install
 npm run dev
 ```
 
-Frontend будет доступен по адресу `http://localhost:8080`
+Frontend будет доступен по адресу `https://wizary.windexs.ru`
 
 ### Backend (для отправки email)
 
@@ -53,7 +53,7 @@ npm install
 npm start
 ```
 
-Backend будет доступен по адресу `http://localhost:3001`
+Backend будет доступен по адресу `https://wizary.windexs.ru`
 
 ## Сборка проекта
 

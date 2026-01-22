@@ -32,7 +32,7 @@ const ProtectedRoute = ({ children, requireAdmin = false }: { children: React.Re
       }
 
       try {
-        const response = await fetch('http://localhost:3001/api/auth/profile', {
+        const response = await fetch('https://wizary.windexs.ru/api/auth/profile', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

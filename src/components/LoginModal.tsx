@@ -56,7 +56,7 @@ export const LoginModal = ({ isOpen, onClose, onAuthSuccess }: LoginModalProps) 
         ? { email: formData.email, password: formData.password }
         : { name: formData.name, email: formData.email, password: formData.password };
 
-      const response = await fetch(`http://localhost:3001${endpoint}`, {
+      const response = await fetch(`https://wizary.windexs.ru${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -10,7 +10,7 @@ const fetch = require('node-fetch');
 require('dotenv').config();
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8420396906:AAFBiilQjJ1Cwyo0VOsjSSVa9WJpjMBNTdM';
-const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3001';
+const SERVER_URL = process.env.SERVER_URL || 'https://wizary.windexs.ru';
 let lastUpdateId = 0;
 
 console.log('🤖 Telegram Polling запущен...');

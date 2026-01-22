@@ -71,7 +71,7 @@ const Admin = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:3001/api/auth/profile', {
+        const response = await fetch('https://wizary.windexs.ru/api/auth/profile', {
           headers: {
             'Authorization': token
           }
@@ -114,7 +114,7 @@ const Admin = () => {
   const loadUsers = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch('http://localhost:3001/api/admin/users', {
+      const response = await fetch('https://wizary.windexs.ru/api/admin/users', {
         headers: {
           'Authorization': token
         }
@@ -132,7 +132,7 @@ const Admin = () => {
   const loadApplications = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch('http://localhost:3001/api/admin/applications', {
+      const response = await fetch('https://wizary.windexs.ru/api/admin/applications', {
         headers: {
           'Authorization': token
         }
@@ -150,7 +150,7 @@ const Admin = () => {
   const loadLogs = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch('http://localhost:3001/api/admin/logs', {
+      const response = await fetch('https://wizary.windexs.ru/api/admin/logs', {
         headers: {
           'Authorization': token
         }
@@ -173,7 +173,7 @@ const Admin = () => {
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://localhost:3001/api/admin/users?search=${encodeURIComponent(searchQuery)}`, {
+      const response = await fetch(`https://wizary.windexs.ru/api/admin/users?search=${encodeURIComponent(searchQuery)}`, {
         headers: {
           'Authorization': token
         }

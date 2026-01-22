@@ -526,7 +526,7 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on https://wizary.windexs.ru`);
   console.log(`📱 Telegram bot token: ${TELEGRAM_BOT_TOKEN.substring(0, 10)}...`);
   console.log(`🤖 Registered Telegram chats: ${registeredTelegramChats.size}`);
 });
