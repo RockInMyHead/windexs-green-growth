@@ -3,6 +3,8 @@ const cors = require('cors');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const axios = require('axios');
+const { HttpsProxyAgent } = require('https-proxy-agent');
 require('dotenv').config();
 
 const app = express();
@@ -38,7 +40,7 @@ const demoUsers = [
 const registeredTelegramChats = new Set();
 
 // Telegram Bot Configuration
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || 'DEMO_TOKEN_REPLACE_WITH_REAL_TELEGRAM_BOT_TOKEN';
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8420396906:AAFBiilQjJ1Cwyo0VOsjSSVa9WJpjMBNTdM';
 const TELEGRAM_API_URL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}`;
 
 // Authentication Middleware
@@ -323,30 +325,53 @@ app.post('/api/chat', async (req, res) => {
       { role: 'user', content: message }
     ];
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    // Proxy configuration
+    let axiosConfig = {
       method: 'POST',
+      url: 'https://api.openai.com/v1/chat/completions',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${OPENAI_API_KEY}`
       },
-      body: JSON.stringify({
+      data: {
         model: 'gpt-4o-mini',
         messages: messages,
         temperature: 0.8,
         max_tokens: 1000
-      })
-    });
+      }
+    };
 
-    if (!response.ok) {
-      const errorData = await response.text();
-      console.error('OpenAI API error:', errorData);
+    // Add proxy if configured
+    const proxyUrl = process.env.OPENAI_PROXY;
+    if (proxyUrl) {
+      // Format: host:port:username:password -> http://username:password@host:port
+      const proxyMatch = proxyUrl.match(/^([^:]+):(\d+):([^:]+):(.+)$/);
+      if (proxyMatch) {
+        const [, host, port, username, password] = proxyMatch;
+        const formattedProxyUrl = `http://${username}:${password}@${host}:${port}`;
+        const agent = new HttpsProxyAgent(formattedProxyUrl);
+        axiosConfig.httpsAgent = agent;
+        axiosConfig.httpAgent = agent;
+      } else {
+        // If proxy is already in correct format (http://...)
+        const agent = new HttpsProxyAgent(proxyUrl);
+        axiosConfig.httpsAgent = agent;
+        axiosConfig.httpAgent = agent;
+      }
+    }
+
+    let data;
+    try {
+      const response = await axios(axiosConfig);
+      data = response.data;
+    } catch (error) {
+      console.error('OpenAI API error:', error.response?.data || error.message);
       return res.status(500).json({ 
         error: 'Ошибка при обращении к OpenAI API',
-        details: errorData
+        details: error.response?.data || error.message
       });
     }
 
-    const data = await response.json();
     const assistantMessage = data.choices[0]?.message?.content || 'Извините, не удалось получить ответ.';
 
     res.json({
