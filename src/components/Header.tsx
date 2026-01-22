@@ -49,7 +49,7 @@ export const Header = () => {
         <div className="font-display font-bold text-xl">
           <span className="gradient-text">Windexs</span>
         </div>
-
+        
         {isAuthenticated ? (
           <>
             <div className="hidden md:flex items-center gap-3">
@@ -149,7 +149,7 @@ export const Header = () => {
                 size="sm"
                 onClick={handleLogout}
                 className="text-muted-foreground hover:text-foreground"
-              >
+          >
                 <LogIn className="w-4 h-4" />
               </Button>
               <Button
@@ -177,7 +177,7 @@ export const Header = () => {
                 size="sm"
                 onClick={() => navigate('/scenarios')}
                 className="text-muted-foreground hover:text-foreground"
-              >
+          >
                 <FileText className="w-4 h-4 mr-2" />
                 Сценарии
               </Button>
@@ -191,12 +191,12 @@ export const Header = () => {
                 Вход
               </Button>
               <Button
-                onClick={() => scrollToSection("contact")}
+            onClick={() => scrollToSection("contact")}
                 size="sm"
-              >
+          >
                 Заказать
               </Button>
-            </div>
+        </div>
 
             {/* Mobile menu */}
             <div className="md:hidden flex items-center gap-2">
@@ -225,10 +225,10 @@ export const Header = () => {
                 <LogIn className="w-4 h-4" />
               </Button>
               <Button
-                onClick={() => scrollToSection("contact")}
+          onClick={() => scrollToSection("contact")}
                 size="sm"
-              >
-                Заказать
+        >
+          Заказать
               </Button>
             </div>
           </>
